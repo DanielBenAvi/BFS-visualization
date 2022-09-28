@@ -11,7 +11,7 @@ pygame.init()
     Program Variables
 '''
 CLOCK = pygame.time.Clock()
-FPS = 2
+FPS = 1
 RADIUS = 15
 WIDTH = 750
 HEIGHT = 750
@@ -151,10 +151,18 @@ visited.add(root)  # add the root to visited
 algorithm = False
 order_text = 'Order: '
 
+
+add_text_left(window, 'Press SPACE to start', FONT, 25, 25, COLORS['white'])
+draw(root, visited, queue)
+add_text_left(window, order_text, FONT, 25, 50, COLORS['white'])
+pygame.display.update()
+
+
 while not run:
     CLOCK.tick(FPS)
     window.fill(COLORS['black'])
     add_text_left(window, 'Press SPACE to start', FONT, 25, 25, COLORS['white'])
+
     '''
         BNF Start
     '''
@@ -164,6 +172,9 @@ while not run:
             order_text = order_text + str(vertex) + " "
 
             for neighbour in graph[vertex]:
+                draw(root, visited, queue)
+                add_text_left(window, order_text, FONT, 25, 50, COLORS['white'])
+                pygame.display.update()
                 if neighbour not in visited:
                     visited.add(neighbour)
                     queue.append(neighbour)
@@ -181,6 +192,6 @@ while not run:
             if event.key == pygame.K_ESCAPE:
                 run = True
 
-    draw(root, visited, queue)
-    add_text_left(window, order_text, FONT, 25, 50, COLORS['white'])
-    pygame.display.update()
+    # draw(root, visited, queue)
+    # add_text_left(window, order_text, FONT, 25, 50, COLORS['white'])
+    # pygame.display.update()
